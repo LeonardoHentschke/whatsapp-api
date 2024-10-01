@@ -82,7 +82,6 @@ import { lstat, readFileSync } from 'fs';
 import { join } from 'path';
 import axios, { AxiosError } from 'axios';
 import qrcode, { QRCodeToDataURLOptions } from 'qrcode';
-import qrcodeTerminal from 'qrcode-terminal';
 import { Boom } from '@hapi/boom';
 import EventEmitter2 from 'eventemitter2';
 import { release } from 'os';
@@ -401,12 +400,12 @@ export class WAStartupService {
         });
       });
 
-      qrcodeTerminal.generate(qr, { small: true }, (qrcode) =>
-        this.logger.log(
-          `\n{ instance: ${this.instance.name}, qrcodeCount: ${this.instanceQr.count} }\n` +
-            qrcode,
-        ),
-      );
+      // qrcodeTerminal.generate(qr, { small: true }, (qrcode) =>
+      //   this.logger.log(
+      //     `\n{ instance: ${this.instance.name}, qrcodeCount: ${this.instanceQr.count} }\n` +
+      //       qrcode,
+      //   ),
+      // );
     }
 
     if (connection) {
@@ -839,7 +838,7 @@ export class WAStartupService {
         messageRaw['info'] = { type };
 
         this.logger.log('Type: ' + type);
-        console.log(messageRaw);
+        // console.log(messageRaw);
 
         this.ws.send(this.instance.name, 'messages.upsert', messageRaw);
 

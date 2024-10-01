@@ -75,6 +75,7 @@ import { docsRouter } from './config/scala.config';
 import { ProviderFiles } from './provider/sessions';
 import { Websocket } from './websocket/server';
 import { createServer } from 'http';
+import cors from 'cors';
 
 export function describeRoutes(
   rootPath: string,
@@ -217,6 +218,12 @@ export async function AppModule(context: Map<string, any>) {
       saveUninitialized: false,
       name: 'codechat.api.sid',
     }),
+  );
+
+  app.use(
+    cors({
+      origin: '*'
+    })
   );
 
   app.set('view engine', 'hbs');
